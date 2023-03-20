@@ -1,0 +1,20 @@
+name: Deploy Production
+
+on:
+  release:
+    types: [published]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      HEROKU_PASSWORD: ${{ secrets.HEROKU_PASSWORD }}
+      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      HEROKU_APP_NAME: "site-test"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
